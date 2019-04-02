@@ -1,0 +1,38 @@
+<div>
+  <br/>
+  <div class="col-sm-12">
+    <h1>Image Uploader</h1><hr/>
+    <button class="btn btn-primary" (click)="imageInput.click()">Select Images</button>
+    <input class="form-control d-none" type="file" (change)="selectFiles($event)" multiple #imageInput/>
+    <button class="btn btn-success float-right" (click)="uploadImages()">Upload</button>
+    <hr>
+    <p class="text-info" *ngIf="message"><strong>{{message}}</strong></p>
+    <hr>
+    <div class="col-12" *ngFor="let image of images">
+      <div class="progress" style="margin-bottom: 10px" *ngIf="image.uploadProgress">
+        <div class="progress-bar progress-bar-striped progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" naria-valuemax="100" [ngStyle]="{'width': image.uploadProgress }"></div>
+      </div>
+    </div>
+  </div>
+  
+  <hr/>
+
+  <div class="row">
+    <div cdkDropList [cdkDropListData]="imageUrls"
+    [cdkDropListConnectedTo]="secondList" #firstList="cdkDropList"
+    (cdkDropListDropped)="drop($event)" class="col-2 offset-2 card" style="min-height: 100px">
+    <h4>Images</h4>
+    <div *ngFor="let imageUrl of imageUrls" class="pop" cdkDrag>
+      <img  src="{{imageUrl}}" class="img-thumbnail" alt="not available"/><br/>
+    </div>
+    </div>
+    <div cdkDropList [cdkDropListData]="favourites"
+    [cdkDropListConnectedTo]="firstList" #secondList="cdkDropList"
+    (cdkDropListDropped)="drop($event)" class="col-2 offset-2 card" style="min-height: 100px">
+    <h4>Favourites Images</h4>
+    <div *ngFor="let imageUrl of favourites" class="pop" cdkDrag>
+      <img  src="{{imageUrl}}" class="img-thumbnail" alt="not available"/><br/>
+    </div>
+    </div>
+  </div>
+</div>
