@@ -45,9 +45,8 @@ export class AppComponent {
         .subscribe(event => {
           if (event.type === HttpEventType.UploadProgress ) {
             image.uploadProgress = `${(event.loaded / event.total * 100)}%`;
-          } 
+          }
           if (event.type === HttpEventType.Response) {
-            this.imageUrls.push(event.body.imageUrl);
           }
         });
     });
